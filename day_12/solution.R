@@ -45,3 +45,12 @@ solution_2 <- paths |>
     as_tibble() |>
     slice_min(distance, n = 1) |>
     pull(distance)
+
+#### Some visualisation ####
+paths |>
+    filter(is.infinite(distance)) |>
+    ggraph(layout = 'grid') +
+    geom_edge_link() +
+    geom_node_point(aes(size = distance), colour = 'steelblue') +
+    scale_size_continuous(range = c(6, 1)) +
+    theme_graph()
